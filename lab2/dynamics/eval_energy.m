@@ -1,7 +1,7 @@
 function [T, V] = eval_energy(q, dq)    
 
     % load relevant parameters
-    [m1, m2, m3, l1, l2, l3, g] = set_parameters()
+    [m1, m2, m3, l1, l2, l3, g] = set_parameters();
     q1 = q(1); q2 = q(2); q3 = q(3);
     dq1 = dq(1); dq2 = dq(2); dq3 = dq(3);
     
