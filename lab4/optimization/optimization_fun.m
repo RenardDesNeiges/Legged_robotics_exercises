@@ -1,22 +1,11 @@
-function objective_value = optimization_fun(parameters)
-
-% extract parameters q0, dq0 and x
-q0 = ...
-dq0 = ...;
-x = ...;
-
-% run simulation
-num_steps = 10; % the higher the better, but slow
-sln = solve_eqns(q0, dq0, num_steps, x);
-results = analyse(sln, x, false);
-
-% calculate metrics such as distance, mean velocity and cost of transport
-max_actuation = 30;
-effort = ...;
-distance = ...;
-velocity = ...;
-CoT = ...;
-objective_value = ...;
+function objective_value = optimization_fun(input_x)
+    
+    q0 = input_x(1:3);
+    dq0 = input_x(4:6);
+    sol = solve_eqns(q0, dq0, 10, input_x(6:end));
+    CoT = analyse(sol,input_x(3:end),false).CoT;
+    Speed = analyse(sol,input_x(3:end),false).Velocity;
+    objective_value = w(1) * (Speed-tspeed) + w(2) * CoT;
 
 % handle corner case when model walks backwards (e.g., objective_value =
 % 1000)

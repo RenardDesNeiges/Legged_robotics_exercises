@@ -12,9 +12,6 @@ sln = solve_eqns(q0, dq0, num_steps, default_parameters);
 
 %%
 animate(sln);
-analyse(sln, default_parameters, true);
-
-
 %%
-close all
-analyse(sln,default_parameters,true);
+analyse(sln, default_parameters, true)
+

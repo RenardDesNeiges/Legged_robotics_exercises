@@ -53,28 +53,43 @@ if to_plot
 
     subplot(2,1,1)
     plot(full_T,full_q(:,1:3))
+    title('q1,q2,q3') 
     subplot(2,1,2)
     plot(full_T,full_q(:,4:6))
-
+    title('dq1,dq2,dq3') 
+    
     figure
     subplot(2,1,1)
     plot(full_T,full_x)
+    title('X position over time')
     subplot(2,1,2)
     plot(full_T,full_z)
+    title('Z position over time')
+    
+    sgtitle('Position over time') 
     
     figure
     plot(full_T,full_dx)
     hold on
     yline(mean(full_dx))
+    title('horizontal speed and mean speed')
     
-   
+    
     figure
+    
     subplot(2,2,1)
     plot(full_q(:,1),full_q(:,4))
+    title('q1')
+    
     subplot(2,2,2)
     plot(full_q(:,2),full_q(:,5))
+    title('q2')
+    
     subplot(2,2,3)
     plot(full_q(:,3),full_q(:,6))
+    title('q3')
+    
+    sgtitle('Limit Cycles') 
     
    
     figure
@@ -88,5 +103,10 @@ results.distance = full_x(end)-full_x(1);
 results.step_frequency = 1/mean(step_time);
 results.step_length = mean(step_len);
 results.velocity = mean(full_dx);
+
+results.effort = (2*30*full_T(end))^-1 * sum(sum(full_u.^2));
+results.CoT = results.effort/(results.distance);
+
+results.cost =  1000 * abs(results.velocity-6) + 10 * results.CoT;
 
 end

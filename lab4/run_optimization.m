@@ -2,7 +2,7 @@ clc;
 clear;
 close all;
 
-%% optimize
+%% optimize for speed
 % optimize the initial conditions and controller hyper parameters
 q0 = [pi/9; -pi/9; 0];
 dq0 = [0; 0; 8]; 
@@ -16,8 +16,8 @@ x0 = [q0; dq0; control_hyper_parameters()];
 
 
 
-optifun = @(x) -analyse(solve_eqns(q0, dq0, 10, x(3:end)),x(3:end),false).step_length;
-opt = fminsearch(optifun,x0);
+optifun1 = @(x) analyse(solve_eqns(q0, dq0, 10, x(3:end)),x(3:end),false).cost;
+opt = fminsearch(optifun1,x0);
 
 %% simulate solution
 
@@ -30,4 +30,7 @@ x_opt = opt(7:11);
 num_steps = 10;
 sln = solve_eqns(q0, dq0, num_steps, x_opt);
 animate(sln);
-results = analyse(sln, x_opt, true);
+disp("speed optimization")
+results_speed = analyse(sln, x_opt, true)
+
+
