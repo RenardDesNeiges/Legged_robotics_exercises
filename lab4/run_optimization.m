@@ -15,8 +15,9 @@ x0 = [q0; dq0; control_hyper_parameters()];
 
 
 
-
-optifun1 = @(x) analyse(solve_eqns(q0, dq0, 10, x(3:end)),x(3:end),false).cost;
+target_speed = 6;
+w = [10,10];
+optifun1 = @(x) optimization_fun(x,w,target_speed);
 opt = fminsearch(optifun1,x0);
 
 %% simulate solution
