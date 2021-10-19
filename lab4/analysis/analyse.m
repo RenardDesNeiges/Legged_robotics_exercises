@@ -107,6 +107,6 @@ results.velocity = mean(full_dx);
 results.effort = (2*30*full_T(end))^-1 * sum(sum(full_u.^2));
 results.CoT = results.effort/(results.distance);
 
-results.cost =  1000 * abs(results.velocity-6) + 10 * results.CoT;
+results.cost =  1000 * abs(results.velocity-0.8) + 10 * results.CoT;
 
 end
